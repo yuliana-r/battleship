@@ -31,6 +31,21 @@ module.exports = {
           filename: 'assets/[name]-[hash][ext]',
         },
       },
+      // {
+      //   test: /\.jsx?$/,
+      //   exclude: ['node_modules'],
+      //   use: ['babel-loader'],
+      // },
+      // {
+      //   test: /\.js$/,
+      //   exclude: /node_modules/,
+      //   use: {
+      //     loader: 'babel-loader',
+      //     options: {
+      //       presets: ['@babel/preset-env'],
+      //     },
+      //   },
+      // },
     ],
   },
   plugins: [

@@ -1,15 +1,13 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable class-methods-use-this */
-import Ship from './Ship';
-
 export default class Gameboard {
-  static width = 10;
-
   static height = 10;
 
-  constructor(playerName) { // player, computer
-    this.playerName = playerName;
-    this._board = Array(Gameboard.height).fill(0).map(() => Array(Gameboard.width).fill(0));
+  static width = 10;
+
+  constructor() { // player, computer
+    // this.playerName = playerName;
+    this._board = Array(Gameboard.height).fill().map(() => Array(Gameboard.width).fill(0));
     this._sunkShips = 0;
   }
 
