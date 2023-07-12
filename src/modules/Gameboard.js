@@ -89,6 +89,13 @@ export default class Gameboard {
       return 'miss';
     }
     board[row][column].hit();
+    // check if sunk to display message for user
+    // console.log(`is ${board[row][column].name} sunk? ${board[row][column].isSunk()}`);
+
+    // if (board[row][column].isSunk()) {
+    //   return `${board[row][column]} has been sunk!`;
+    // }
+
     this.updateSunkShipCounter(board[row][column]);
     board[row][column] = 'hit';
     return 'hit';

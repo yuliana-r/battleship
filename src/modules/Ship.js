@@ -14,9 +14,9 @@ export default class Ship {
     return this._length;
   }
 
-  // get name() {
-  //   return this._name;
-  // }
+  get name() {
+    return this._name;
+  }
 
   hit() {
     return this.hits++;

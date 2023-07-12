@@ -8,6 +8,7 @@ export default class Player {
     this.name = isAI ? 'Computer' : 'You';
     this._isAI = isAI;
     this._board = new Gameboard();
+    this._potentialMoves = [];
   }
 
   // get isAI() {
@@ -49,7 +50,7 @@ export default class Player {
         }
       }
     } else {
-      gameboard.placeShip([2, 1], carrier, 'y');
+      gameboard.placeShip([2, 0], carrier, 'y');
       gameboard.placeShip([8, 2], battleship, 'x');
       gameboard.placeShip([6, 4], destroyer, 'x');
       gameboard.placeShip([1, 4], submarine, 'y');
@@ -63,15 +64,38 @@ export default class Player {
     if (this._isAI) {
       let row;
       let column;
-
       let legalMove = false;
-      while (legalMove !== 'miss' && legalMove !== 'hit') {
-        row = this.getRandomAICoord();
-        column = this.getRandomAICoord();
+      const potentialMoves = this._potentialMoves;
+
+      if (potentialMoves.length > 0) {
+        const coord = potentialMoves[0];
+        [row, column] = coord;
         legalMove = enemy.board.receiveAttack([row, column]);
+        potentialMoves.shift();
+      } else {
+        while (legalMove !== 'miss' && legalMove !== 'hit' && potentialMoves.length === 0) {
+          row = this.getRandomAICoord();
+          column = this.getRandomAICoord();
+          legalMove = enemy.board.receiveAttack([row, column]);
+        }
       }
+
       if (legalMove === 'hit') {
-        console.log('true');
+        if (row - 1 >= 0) {
+          potentialMoves.push([row - 1, column]);
+        }
+
+        if (column - 1 >= 0) {
+          potentialMoves.push([row, column - 1]);
+        }
+
+        if (row + 1 <= 9) {
+          potentialMoves.push([row + 1, column]);
+        }
+
+        if (column + 1 <= 9) {
+          potentialMoves.push([row, column + 1]);
+        }
       }
     }
   }
