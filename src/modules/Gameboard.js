@@ -36,9 +36,9 @@ export default class Gameboard {
 
     if (board[row][column] !== 0) return false;
 
-    if (axis === 'x') { // horizontal
+    if (axis === 'x') {
       if (column + ship.length > 10) return false;
-      // to refactor later
+
       for (let i = 0; i < ship.length; i++) {
         if (board[row][column + i] !== 0) return false;
       }
@@ -48,7 +48,7 @@ export default class Gameboard {
       return true;
     }
     if (row + ship.length > 10) return false;
-    // to refactor later
+
     for (let i = 0; i < ship.length; i++) {
       if (board[row + i][column] !== 0) return false;
     }
@@ -74,11 +74,5 @@ export default class Gameboard {
       this.updateSunkShipCounter(board[row][column]);
       board[row][column] = 'hit';
     }
-
-    // if (board[row][column] !== 0 && board[row][column] !== 'miss'
-    // && !board[row][column].isSunk()) {
-    //   board[row][column].hit();
-    //   board[row][column] = 'hit';
-    // }
   }
 }

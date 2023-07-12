@@ -1,5 +1,7 @@
 // console.log('I work');
 import Player from './modules/Player';
 
-const player = new Player(true);
-console.log(player.placeAIShips());
+const ai = new Player(true);
+const player = new Player(false);
+console.log(ai.placeShips());
+console.log(player.placeShips());
