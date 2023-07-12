@@ -31,12 +31,13 @@ export default class Player {
 
     const ships = [carrier, battleship, destroyer, submarine, cruiser];
 
-    while (ships.length > 0) {
-      for (let i = 0; i < ships.length; i++) {
+    for (let i = 0; i < ships.length; i++) {
+      let shipPlaced = false;
+      while (!shipPlaced) {
         const axis = this.getRandomAxis();
         const row = this.getRandomAICoord();
         const column = this.getRandomAICoord();
-        gameboard.placeShip([row, column], ships[i], axis);
+        shipPlaced = gameboard.placeShip([row, column], ships[i], axis);
       }
     }
 

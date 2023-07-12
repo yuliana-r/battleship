@@ -34,27 +34,28 @@ export default class Gameboard {
     const column = startIndex[1]; // [4]
     const board = this._board;
 
-    if (board[row][column] !== 0) return;
+    if (board[row][column] !== 0) return false;
 
     if (axis === 'x') { // horizontal
-      if (column + ship.length > 10) return;
+      if (column + ship.length > 10) return false;
       // to refactor later
       for (let i = 0; i < ship.length; i++) {
-        if (board[row][column + i] !== 0) return;
+        if (board[row][column + i] !== 0) return false;
       }
       for (let i = 0; i < ship.length; i++) {
         board[row][column + i] = ship;
       }
-    } else {
-      if (row + ship.length > 10) return;
-      // to refactor later
-      for (let i = 0; i < ship.length; i++) {
-        if (board[row + i][column] !== 0) return;
-      }
-      for (let i = 0; i < ship.length; i++) {
-        board[row + i][column] = ship;
-      }
+      return true;
     }
+    if (row + ship.length > 10) return false;
+    // to refactor later
+    for (let i = 0; i < ship.length; i++) {
+      if (board[row + i][column] !== 0) return false;
+    }
+    for (let i = 0; i < ship.length; i++) {
+      board[row + i][column] = ship;
+    }
+    return true;
   }
 
   receiveAttack(coordinates) {
