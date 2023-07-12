@@ -10,12 +10,21 @@ export default class Player {
     this._board = new Gameboard();
   }
 
-  get isAI() {
-    return this._isAI;
+  // get isAI() {
+  //   return this._isAI;
+  // }
+
+  get board() {
+    return this._board;
   }
 
   getRandomAICoord() {
     return Math.floor(Math.random() * 10);
+  }
+
+  getRandomAxis() {
+    const randomNum = Math.random();
+    return randomNum < 0.5 ? 'x' : 'y';
   }
 
   placeShips() {
@@ -50,8 +59,17 @@ export default class Player {
     return gameboard;
   }
 
-  getRandomAxis() {
-    const randomNum = Math.random();
-    return randomNum < 0.5 ? 'x' : 'y';
+  sendAttack(enemy) {
+    if (this._isAI) {
+      let row;
+      let column;
+
+      let legalMove = false;
+      while (legalMove !== 'miss' || legalMove !== 'hit') {
+        row = this.getRandomAICoord();
+        column = this.getRandomAICoord();
+        legalMove = enemy.board.receiveAttack([row, column]);
+      }
+    }
   }
 }

@@ -58,21 +58,35 @@ export default class Gameboard {
     return true;
   }
 
+  checkAllShipsPlaced() {
+    const board = this._board;
+    let emptySlots = 0;
+
+    board.forEach((row) => {
+      row.forEach((slot) => {
+        if (slot === 0) { emptySlots++; }
+      });
+    });
+
+    return emptySlots === 83;
+  }
+
   receiveAttack(coordinates) {
     const board = this._board;
     const row = coordinates[0];
     const column = coordinates[1];
 
     if (row > 9 || column > 9 || board[row][column] === 'miss'
-    || board[row][column] === 'hit') return;
+    || board[row][column] === 'hit') return false;
 
     if (board[row][column] === 0) {
       // record the missed shot for styling purposes?
       board[row][column] = 'miss';
-    } else {
-      board[row][column].hit();
-      this.updateSunkShipCounter(board[row][column]);
-      board[row][column] = 'hit';
+      return 'miss';
     }
+    board[row][column].hit();
+    this.updateSunkShipCounter(board[row][column]);
+    board[row][column] = 'hit';
+    return 'hit';
   }
 }
