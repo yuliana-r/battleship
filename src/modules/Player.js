@@ -65,10 +65,13 @@ export default class Player {
       let column;
 
       let legalMove = false;
-      while (!legalMove || legalMove !== 'miss' || legalMove !== 'hit') {
+      while (legalMove !== 'miss' && legalMove !== 'hit') {
         row = this.getRandomAICoord();
         column = this.getRandomAICoord();
         legalMove = enemy.board.receiveAttack([row, column]);
+      }
+      if (legalMove === 'hit') {
+        console.log('true');
       }
     }
   }

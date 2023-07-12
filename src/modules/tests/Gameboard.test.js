@@ -1,7 +1,7 @@
 import Gameboard from '../Gameboard';
 import Ship from '../Ship';
 
-test('placeShip() places correct ship horizontally', () => {
+test('places correct ship horizontally', () => {
   const testBoard = new Gameboard();
   const submarine = new Ship('submarine', 3);
   testBoard.placeShip([6, 4], submarine, 'x');
@@ -19,7 +19,7 @@ test('placeShip() places correct ship horizontally', () => {
   ]);
 });
 
-test('placeShip() places correct ship vertically', () => {
+test('places correct ship vertically', () => {
   const testBoard = new Gameboard();
   const carrier = new Ship('carrier', 5);
   testBoard.placeShip([2, 1], carrier, 'y');
@@ -37,7 +37,7 @@ test('placeShip() places correct ship vertically', () => {
   ]);
 });
 
-test('placeShip() does not place out of bounds ship horizontally', () => {
+test('does not place out of bounds ship horizontally', () => {
   const testBoard = new Gameboard();
   const carrier = new Ship('carrier', 5);
   testBoard.placeShip([8, 1], carrier, 'y');
@@ -55,7 +55,7 @@ test('placeShip() does not place out of bounds ship horizontally', () => {
   ]);
 });
 
-test('placeShip() does not place out of bounds ship vertically', () => {
+test('does not place out of bounds ship vertically', () => {
   const testBoard = new Gameboard();
   const carrier = new Ship('carrier', 5);
   testBoard.placeShip([8, 6], carrier, 'x');
@@ -73,7 +73,7 @@ test('placeShip() does not place out of bounds ship vertically', () => {
   ]);
 });
 
-test('placeShip() does not place ship if index is taken', () => {
+test('does not place ship if index is taken', () => {
   const testBoard = new Gameboard();
   const submarine = new Ship('submarine', 3);
   const cruiser = new Ship('cruiser', 2);
@@ -93,7 +93,7 @@ test('placeShip() does not place ship if index is taken', () => {
   ]);
 });
 
-test('placeShip() does not place ship if it overlaps another ship', () => {
+test('does not place ship if it overlaps another ship', () => {
   const testBoard = new Gameboard();
   const submarine = new Ship('submarine', 3);
   const battleship = new Ship('battleship', 4);
@@ -113,7 +113,7 @@ test('placeShip() does not place ship if it overlaps another ship', () => {
   ]);
 });
 
-test('receiveAttack() records missed attack correctly', () => {
+test('records missed attack correctly', () => {
   const testBoard = new Gameboard();
   const submarine = new Ship('submarine', 3);
   testBoard.placeShip([6, 4], submarine, 'x');
@@ -134,7 +134,7 @@ test('receiveAttack() records missed attack correctly', () => {
   ]);
 });
 
-test('receiveAttack() does not record out of bounds attacks', () => {
+test('does not record out of bounds attacks', () => {
   const testBoard = new Gameboard();
   const submarine = new Ship('submarine', 3);
   testBoard.placeShip([6, 4], submarine, 'x');
@@ -155,7 +155,7 @@ test('receiveAttack() does not record out of bounds attacks', () => {
   ]);
 });
 
-test('receiveAttack() records correct ship attack', () => {
+test('records correct ship attack', () => {
   const testBoard = new Gameboard();
   const submarine = new Ship('submarine', 3);
   testBoard.placeShip([6, 4], submarine, 'x');
@@ -174,7 +174,7 @@ test('receiveAttack() records correct ship attack', () => {
   ]);
 });
 
-test('receiveAttack() sends hit() to correct ship', () => {
+test('sends hit() to correct ship', () => {
   const testBoard = new Gameboard();
   const submarine = new Ship('submarine', 3);
   testBoard.placeShip([6, 4], submarine, 'x');
@@ -182,7 +182,7 @@ test('receiveAttack() sends hit() to correct ship', () => {
   expect(submarine.hitsNum).toStrictEqual(1);
 });
 
-test('receiveAttack() records sunk ship correctly', () => {
+test('records sunk ship correctly', () => {
   const testBoard = new Gameboard();
   const submarine = new Ship('submarine', 3);
   testBoard.placeShip([6, 4], submarine, 'x');
@@ -192,7 +192,7 @@ test('receiveAttack() records sunk ship correctly', () => {
   expect(submarine.isSunk()).toBe(true);
 });
 
-test('allShipsSunkCheck() returns false if not all ships have been sunk', () => {
+test('returns false if not all ships have been sunk', () => {
   const testBoard = new Gameboard();
   const submarine = new Ship('submarine', 3);
   testBoard.placeShip([6, 4], submarine, 'x');
@@ -202,7 +202,17 @@ test('allShipsSunkCheck() returns false if not all ships have been sunk', () => 
   expect(testBoard.allShipsSunkCheck()).toBe(false);
 });
 
-test('allShipsSunkCheck() returns true if all ships have been sunk', () => {
+test('returns correct number of remaining ships', () => {
+  const testBoard = new Gameboard();
+  const submarine = new Ship('submarine', 3);
+  testBoard.placeShip([6, 4], submarine, 'x');
+  testBoard.receiveAttack([6, 4]);
+  testBoard.receiveAttack([6, 5]);
+  testBoard.receiveAttack([6, 6]);
+  expect(testBoard.remainingShips()).toBe(4);
+});
+
+test('returns true if all ships have been sunk', () => {
   const testBoard = new Gameboard();
   const carrier = new Ship('carrier', 5);
   const battleship = new Ship('battleship', 4);

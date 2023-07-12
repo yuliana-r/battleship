@@ -29,6 +29,10 @@ export default class Gameboard {
     }
   }
 
+  remainingShips() {
+    return 5 - this.sunkShips;
+  }
+
   placeShip(startIndex, ship, axis) {
     const row = startIndex[0]; // [6]
     const column = startIndex[1]; // [4]
