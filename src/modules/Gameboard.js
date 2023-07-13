@@ -5,10 +5,10 @@ export default class Gameboard {
 
   static width = 10;
 
-  constructor() { // player, computer
-    // this.playerName = playerName;
+  constructor() {
     this._board = Array(Gameboard.height).fill().map(() => Array(Gameboard.width).fill(0));
     this._sunkShips = 0;
+    this._sunkShipsNames = [];
   }
 
   get board() {
@@ -17,6 +17,10 @@ export default class Gameboard {
 
   get sunkShips() {
     return this._sunkShips;
+  }
+
+  get sunkShipsNames() {
+    return this._sunkShipsNames;
   }
 
   allShipsSunkCheck() {
@@ -89,12 +93,10 @@ export default class Gameboard {
       return 'miss';
     }
     board[row][column].hit();
-    // check if sunk to display message for user
-    // console.log(`is ${board[row][column].name} sunk? ${board[row][column].isSunk()}`);
 
-    // if (board[row][column].isSunk()) {
-    //   return `${board[row][column]} has been sunk!`;
-    // }
+    if (board[row][column].isSunk()) {
+      this._sunkShipsNames.push(board[row][column].name);
+    }
 
     this.updateSunkShipCounter(board[row][column]);
     board[row][column] = 'hit';

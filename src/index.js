@@ -19,7 +19,4 @@ ai.sendAttack(player);
 ai.sendAttack(player);
 ai.sendAttack(player);
 ai.sendAttack(player);
-ai.sendAttack(player);
-ai.sendAttack(player);
-ai.sendAttack(player);
 console.log(player.board);

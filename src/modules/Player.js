@@ -97,6 +97,8 @@ export default class Player {
           potentialMoves.push([row, column + 1]);
         }
       }
+    } else {
+      // user clicks to attack enemy's cells on the board
     }
   }
 }
