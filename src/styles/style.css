@@ -1,0 +1,24 @@
+.gameboards {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+#player-one,
+#player-two {
+    display: flex;
+    flex-wrap: wrap;
+    width: 400px;
+}
+
+#player-one div,
+#player-two div {
+    box-sizing: border-box;
+    width: 10%;
+    height: 40px;
+    border: 1px solid black;
+}
+
+[data-cell*='ship'] {
+    background-color: pink;
+}

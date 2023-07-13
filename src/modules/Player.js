@@ -19,6 +19,10 @@ export default class Player {
     return this._board;
   }
 
+  get isAI() {
+    return this._isAI;
+  }
+
   getRandomAICoord() {
     return Math.floor(Math.random() * 10);
   }
@@ -61,6 +65,8 @@ export default class Player {
   }
 
   sendAttack(enemy, x, y) {
+    let hitOutcome = '';
+
     if (x !== undefined && y !== undefined) {
       // player attacks by clicks
     }
@@ -69,7 +75,7 @@ export default class Player {
       let row;
       let column;
       let legalMove = false;
-      let hitOutcome = '';
+
       const potentialMoves = this._potentialMoves;
 
       if (potentialMoves.length > 0) {
@@ -114,9 +120,8 @@ export default class Player {
       } else {
         hitOutcome = 'Missed!';
       }
-
-      console.log(hitOutcome);
-      return hitOutcome;
     }
+    console.log(hitOutcome);
+    return hitOutcome;
   }
 }

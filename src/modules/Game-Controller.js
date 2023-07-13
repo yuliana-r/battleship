@@ -9,9 +9,9 @@ export default class Game {
   }
 
   startGame() {
+    this.playerOne.placeShips();
+    this.playerTwo.placeShips();
     if (this.playerOne.board.checkAllShipsPlaced() && this.playerTwo.board.checkAllShipsPlaced()) {
-      this.playerOne.placeShips();
-      this.playerTwo.placeShips();
     //   this.currentPlayer.sendAttack(this.playerTwo);
     }
   }
