@@ -9,6 +9,7 @@ export default class Gameboard {
     this._board = Array(Gameboard.height).fill().map(() => Array(Gameboard.width).fill(0));
     this._sunkShips = 0;
     this._sunkShipsNames = [];
+    this._hitShipsNames = [];
   }
 
   get board() {
@@ -21,6 +22,10 @@ export default class Gameboard {
 
   get sunkShipsNames() {
     return this._sunkShipsNames;
+  }
+
+  get hitShipsNames() {
+    return this._hitShipsNames;
   }
 
   allShipsSunkCheck() {
@@ -96,6 +101,8 @@ export default class Gameboard {
 
     if (board[row][column].isSunk()) {
       this._sunkShipsNames.push(board[row][column].name);
+    } else {
+      this._hitShipsNames.push(board[row][column].name);
     }
 
     this.updateSunkShipCounter(board[row][column]);

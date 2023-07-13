@@ -5,15 +5,15 @@ import Gameboard from './Gameboard';
 
 export default class Player {
   constructor(isAI) {
-    this.name = isAI ? 'Computer' : 'You';
+    this._name = isAI ? 'Computer' : 'You';
     this._isAI = isAI;
     this._board = new Gameboard();
     this._potentialMoves = [];
   }
 
-  // get isAI() {
-  //   return this._isAI;
-  // }
+  get name() {
+    return this._name;
+  }
 
   get board() {
     return this._board;
@@ -60,11 +60,16 @@ export default class Player {
     return gameboard;
   }
 
-  sendAttack(enemy) {
-    if (this._isAI) {
+  sendAttack(enemy, x, y) {
+    if (x !== undefined && y !== undefined) {
+      // player attacks by clicks
+    }
+
+    if (this._isAI && x === undefined && y === undefined) {
       let row;
       let column;
       let legalMove = false;
+      let hitOutcome = '';
       const potentialMoves = this._potentialMoves;
 
       if (potentialMoves.length > 0) {
@@ -97,8 +102,21 @@ export default class Player {
           potentialMoves.push([row, column + 1]);
         }
       }
-    } else {
-      // user clicks to attack enemy's cells on the board
+
+      if (enemy.board.hitShipsNames.length > 0) {
+        const ship = enemy.board.hitShipsNames[0];
+        enemy.board.hitShipsNames.splice(0, 1);
+        hitOutcome = `Your ${ship} has been hit!`;
+      } else if (enemy.board.sunkShipsNames.length > 0) {
+        const ship = enemy.board.sunkShipsNames[0];
+        enemy.board.sunkShipsNames.splice(0, 1);
+        hitOutcome = `Your ${ship} has been sunk!`;
+      } else {
+        hitOutcome = 'Missed!';
+      }
+
+      console.log(hitOutcome);
+      return hitOutcome;
     }
   }
 }
