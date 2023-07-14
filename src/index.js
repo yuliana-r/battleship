@@ -1,66 +1,31 @@
-import Player from './modules/Player';
 import UI from './modules/UI';
+import Game from './modules/Game-Controller';
 import './styles/style.css';
+
+const game = new Game();
 
 const info = document.getElementById('info');
 
-const ai = new Player(true);
-const player = new Player(false);
-
-// console.log(ai.placeShips());
-
-// console.log(player.board);
+const player = game.playerOne;
+const AI = game.playerTwo;
 
 UI.renderGameboard(player);
-UI.renderGameboard(ai);
-ai.placeShips();
-player.placeShips();
-// info.innerText = ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-// ai.sendAttack(player);
-UI.updateBoard(ai);
+UI.renderGameboard(AI);
+game.startGame();
+
+AI.sendAttack(player);
+AI.sendAttack(player);
+AI.sendAttack(player);
+AI.sendAttack(player);
+AI.sendAttack(player);
+AI.sendAttack(player);
+AI.sendAttack(player);
+AI.sendAttack(player);
+AI.sendAttack(player);
+AI.sendAttack(player);
+AI.sendAttack(player);
+AI.sendAttack(player);
+UI.updateBoard(AI);
 UI.updateBoard(player);
 
 const computerCells = document.querySelectorAll('#player-two div');
@@ -68,7 +33,7 @@ computerCells.forEach((cell) => {
   cell.addEventListener('click', (e) => {
     const row = e.target.getAttribute('data-cell-x');
     const column = e.target.getAttribute('data-cell-y');
-    info.innerText = player.sendAttack(ai, row, column);
-    UI.updateBoard(ai);
+    info.innerText = player.sendAttack(AI, row, column);
+    UI.updateBoard(AI);
   });
 });

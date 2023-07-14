@@ -64,37 +64,94 @@ export default class Player {
     return gameboard;
   }
 
-  sendAttack(enemy, x, y) {
-    let hitOutcome = '';
+  // sendAttack(enemy, x, y) {
+  //   let hitOutcome = '';
 
+  //   if (x !== undefined && y !== undefined) {
+  //     enemy.board.receiveAttack([x, y]);
+  //     if (enemy.board.hitShipsNames.length > 0) {
+  //       const ship = enemy.board.hitShipsNames[0];
+  //       enemy.board.hitShipsNames.splice(0, 1);
+  //       hitOutcome = `Your have hit ${enemy.name.toLowerCase()}'s ${ship}!`;
+  //     } else if (enemy.board.sunkShipsNames.length > 0) {
+  //       const ship = enemy.board.sunkShipsNames[0];
+  //       enemy.board.sunkShipsNames.splice(0, 1);
+  //       hitOutcome = `Your have sunk ${enemy.name.toLowerCase()}'s ${ship}!`;
+  //     } else {
+  //       hitOutcome = 'Missed!';
+  //     }
+  //     console.log(enemy.board);
+  //   }
+
+  //   if (this._isAI && x === undefined && y === undefined) {
+  //     let row;
+  //     let column;
+  //     let legalMove = false;
+
+  //     const potentialMoves = this._potentialMoves;
+
+  //     if (potentialMoves.length > 0) {
+  //       const coord = potentialMoves[0];
+  //       [row, column] = coord;
+  //       legalMove = enemy.board.receiveAttack([row, column]);
+  //       potentialMoves.shift();
+  //     } else {
+  //       while (legalMove !== 'miss' && legalMove !== 'hit' && potentialMoves.length === 0) {
+  //         row = this.getRandomAICoord();
+  //         column = this.getRandomAICoord();
+  //         legalMove = enemy.board.receiveAttack([row, column]);
+  //       }
+  //     }
+
+  //     if (legalMove === 'hit') {
+  //       if (row - 1 >= 0) {
+  //         potentialMoves.push([row - 1, column]);
+  //       }
+
+  //       if (column - 1 >= 0) {
+  //         potentialMoves.push([row, column - 1]);
+  //       }
+
+  //       if (row + 1 <= 9) {
+  //         potentialMoves.push([row + 1, column]);
+  //       }
+
+  //       if (column + 1 <= 9) {
+  //         potentialMoves.push([row, column + 1]);
+  //       }
+  //     }
+
+  //     if (enemy.board.hitShipsNames.length > 0) {
+  //       const ship = enemy.board.hitShipsNames[0];
+  //       enemy.board.hitShipsNames.splice(0, 1);
+  //       hitOutcome = `Your ${ship} has been hit!`;
+  //     } else if (enemy.board.sunkShipsNames.length > 0) {
+  //       const ship = enemy.board.sunkShipsNames[0];
+  //       enemy.board.sunkShipsNames.splice(0, 1);
+  //       hitOutcome = `Your ${ship} has been sunk!`;
+  //     } else {
+  //       hitOutcome = 'Missed!';
+  //     }
+  //   }
+  //   console.log(hitOutcome);
+  //   return hitOutcome;
+  // }
+
+  sendAttack(enemy, x, y) {
     if (x !== undefined && y !== undefined) {
       enemy.board.receiveAttack([x, y]);
-      if (enemy.board.hitShipsNames.length > 0) {
-        const ship = enemy.board.hitShipsNames[0];
-        enemy.board.hitShipsNames.splice(0, 1);
-        hitOutcome = `Your have hit ${enemy.name.toLowerCase()}'s ${ship}!`;
-      } else if (enemy.board.sunkShipsNames.length > 0) {
-        const ship = enemy.board.sunkShipsNames[0];
-        enemy.board.sunkShipsNames.splice(0, 1);
-        hitOutcome = `Your have sunk ${enemy.name.toLowerCase()}'s ${ship}!`;
-      } else {
-        hitOutcome = 'Missed!';
-      }
-      console.log(enemy.board);
     }
 
     if (this._isAI && x === undefined && y === undefined) {
       let row;
       let column;
       let legalMove = false;
-
       const potentialMoves = this._potentialMoves;
 
       if (potentialMoves.length > 0) {
-        const coord = potentialMoves[0];
+        const coord = potentialMoves.shift();
         [row, column] = coord;
         legalMove = enemy.board.receiveAttack([row, column]);
-        potentialMoves.shift();
       } else {
         while (legalMove !== 'miss' && legalMove !== 'hit' && potentialMoves.length === 0) {
           row = this.getRandomAICoord();
@@ -104,48 +161,57 @@ export default class Player {
       }
 
       if (legalMove === 'hit') {
-        if (row - 1 >= 0) {
-          potentialMoves.push([row - 1, column]);
-        }
+        this.updatePotentialMoves(row, column, potentialMoves);
+        //   const adjacentMoves = [
+        //     [row - 1, column],
+        //     [row, column - 1],
+        //     [row + 1, column],
+        //     [row, column + 1],
+        //   ];
 
-        if (column - 1 >= 0) {
-          potentialMoves.push([row, column - 1]);
-        }
-
-        if (row + 1 <= 9) {
-          potentialMoves.push([row + 1, column]);
-        }
-
-        if (column + 1 <= 9) {
-          potentialMoves.push([row, column + 1]);
-        }
-      }
-
-      if (enemy.board.hitShipsNames.length > 0) {
-        const ship = enemy.board.hitShipsNames[0];
-        enemy.board.hitShipsNames.splice(0, 1);
-        hitOutcome = `Your ${ship} has been hit!`;
-      } else if (enemy.board.sunkShipsNames.length > 0) {
-        const ship = enemy.board.sunkShipsNames[0];
-        enemy.board.sunkShipsNames.splice(0, 1);
-        hitOutcome = `Your ${ship} has been sunk!`;
-      } else {
-        hitOutcome = 'Missed!';
+      //   for (let i = 0; i < adjacentMoves.length; i++) {
+      //     const [adjRow, adjColumn] = adjacentMoves[i];
+      //     if (adjRow >= 0 && adjRow <= 9 && adjColumn >= 0 && adjColumn <= 9) {
+      //       potentialMoves.push(adjacentMoves[i]);
+      //     }
+      //   }
       }
     }
-    // if (enemy.board.hitShipsNames.length > 0) {
-    //   const ship = enemy.board.hitShipsNames[0];
-    //   enemy.board.hitShipsNames.splice(0, 1);
-    //   hitOutcome = `Your ${ship} has been hit!`;
-    // } else if (enemy.board.sunkShipsNames.length > 0) {
-    //   const ship = enemy.board.sunkShipsNames[0];
-    //   enemy.board.sunkShipsNames.splice(0, 1);
-    //   hitOutcome = `Your ${ship} has been sunk!`;
-    // } else {
-    //   hitOutcome = 'Missed!';
-    // }
+    return this.getHitOutcome(enemy);
+  }
 
-    console.log(hitOutcome);
+  getHitOutcome(enemy) {
+    let hitOutcome = '';
+    const { hitShipsNames } = enemy.board;
+    const { sunkShipsNames } = enemy.board;
+
+    if (hitShipsNames.length > 0) {
+      hitOutcome = enemy.isAi ? `Your ${hitShipsNames.shift()} has been hit!`
+        : `Your have hit ${enemy.name.toLowerCase()}'s ${hitShipsNames.shift()}!`;
+    } else if (sunkShipsNames.length > 0) {
+      hitOutcome = enemy.isAI ? `Your have sunk ${enemy.name.toLowerCase()}'s ${sunkShipsNames.shift()}!`
+        : `Your ${hitShipsNames.shift()} has been sunk!`;
+    } else {
+      hitOutcome = 'Missed!';
+    }
+    console.log(enemy.board);
+
     return hitOutcome;
+  }
+
+  updatePotentialMoves(row, column, potentialMoves) {
+    const adjacentMoves = [
+      [row - 1, column],
+      [row, column - 1],
+      [row + 1, column],
+      [row, column + 1],
+    ];
+
+    for (let i = 0; i < adjacentMoves.length; i++) {
+      const [adjRow, adjColumn] = adjacentMoves[i];
+      if (adjRow >= 0 && adjRow <= 9 && adjColumn >= 0 && adjColumn <= 9) {
+        potentialMoves.push(adjacentMoves[i]);
+      }
+    }
   }
 }

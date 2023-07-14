@@ -1,33 +1,47 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable class-methods-use-this */
 import Player from './Player';
 // import UI from './UI';
 
 export default class Game {
   constructor() {
-    this.playerOne = new Player(false);
-    this.playerTwo = new Player(true);
-    this.currentPlayer = this.playerOne;
+    this._playerOne = new Player(false);
+    this._playerTwo = new Player(true);
+    this._currentPlayer = this.playerOne;
+  }
+
+  get playerOne() {
+    return this._playerOne;
+  }
+
+  get playerTwo() {
+    return this._playerTwo;
+  }
+
+  get currentPlayer() {
+    return this._currentPlayer;
   }
 
   startGame() {
-    this.playerOne.placeShips();
-    this.playerTwo.placeShips();
-    if (this.playerOne.board.checkAllShipsPlaced() && this.playerTwo.board.checkAllShipsPlaced()) {
+    this._playerOne.placeShips();
+    this._playerTwo.placeShips();
+    if (this._playerOne.board.checkAllShipsPlaced()
+    && this._playerTwo.board.checkAllShipsPlaced()) {
     //   this.currentPlayer.sendAttack(this.playerTwo);
     }
   }
 
   switchPlayer() {
-    if (this.currentPlayer === this.playerOne) {
-      this.currentPlayer = this.playerTwo;
-      setTimeout(this.currentPlayer.sendAttack(this.playerOne), 3000);
+    if (this._currentPlayer === this._playerOne) {
+      this._currentPlayer = this._playerTwo;
+      setTimeout(this._currentPlayer.sendAttack(this._playerOne), 3000);
     } else {
-      this.currentPlayer = this.playerOne;
+      this._currentPlayer = this._playerOne;
     }
   }
 
   isGameOver() {
-    if (this.playerOne.board.allShipsSunkCheck() || this.playerTwo.board.allShipsSunkCheck()) {
+    if (this._playerOne.board.allShipsSunkCheck() || this._playerTwo.board.allShipsSunkCheck()) {
       return true;
     }
     return false;
@@ -35,10 +49,10 @@ export default class Game {
 
   getWinner() {
     let winner;
-    if (this.playerOne.board.allShipsSunkCheck()) {
-      winner = this.playerTwo;
-    } else if (this.playerTwo.board.allShipsSunkCheck()) {
-      winner = this.playerOne;
+    if (this._playerOne.board.allShipsSunkCheck()) {
+      winner = this._playerTwo;
+    } else if (this._playerTwo.board.allShipsSunkCheck()) {
+      winner = this._playerOne;
     }
     return winner;
   }
