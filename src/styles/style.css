@@ -1,24 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #e9f2f6;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4em 1em 1em;
+}
+
+.title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 3em;
+    letter-spacing: 12px;
+    color: #6ba3bc;
+}
+
+.info {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 2em;
+    font-size: 25px;
+    color: #292929;
+    min-width: 300px;
+    text-align: center;
+}
+
 .gameboards {
     display: flex;
     flex-direction: row;
-    gap: 1em;
+    justify-content: center;
+    align-items: center;
+    gap: 8em;
+    flex-wrap: wrap;
 }
 
 #player-one,
 #player-two {
     display: flex;
     flex-wrap: wrap;
-    width: 400px;
+    min-width: 350px;
+    border: 2px solid #2c7b9f;
 }
 
-#player-one div,
-#player-two div {
+.board div {
     box-sizing: border-box;
     width: 10%;
-    height: 40px;
-    border: 1px solid black;
+    height: 35px;
+    border: 1px solid #d5e5ec;
+    cursor: pointer;
+    background-color: white;
 }
 
+.board div:hover {
+    background-color: #ebebeb;
+}
+
+
 [data-cell*='ship'] {
-    background-color: pink;
+    background-color: #b8b8b8 !important;
+    /* border: none !important; */
+    border: 1px solid #7a7a7a !important;
+}
+
+
+[data-cell*='hit'] {
+    position: relative;
+}
+
+[data-cell*='hit']::before,
+[data-cell*='hit']::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 2px;
+    height: 100%;
+    background-color: #ed2b2a;
+}
+
+[data-cell*='hit']::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+[data-cell*='hit']::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+[data-cell*='miss'] {
+    position: relative;
+}
+
+[data-cell*='miss']::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #84b3c7;
 }

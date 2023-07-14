@@ -68,7 +68,19 @@ export default class Player {
     let hitOutcome = '';
 
     if (x !== undefined && y !== undefined) {
-      // player attacks by clicks
+      enemy.board.receiveAttack([x, y]);
+      if (enemy.board.hitShipsNames.length > 0) {
+        const ship = enemy.board.hitShipsNames[0];
+        enemy.board.hitShipsNames.splice(0, 1);
+        hitOutcome = `Your have hit ${enemy.name.toLowerCase()}'s ${ship}!`;
+      } else if (enemy.board.sunkShipsNames.length > 0) {
+        const ship = enemy.board.sunkShipsNames[0];
+        enemy.board.sunkShipsNames.splice(0, 1);
+        hitOutcome = `Your have sunk ${enemy.name.toLowerCase()}'s ${ship}!`;
+      } else {
+        hitOutcome = 'Missed!';
+      }
+      console.log(enemy.board);
     }
 
     if (this._isAI && x === undefined && y === undefined) {
@@ -121,6 +133,18 @@ export default class Player {
         hitOutcome = 'Missed!';
       }
     }
+    // if (enemy.board.hitShipsNames.length > 0) {
+    //   const ship = enemy.board.hitShipsNames[0];
+    //   enemy.board.hitShipsNames.splice(0, 1);
+    //   hitOutcome = `Your ${ship} has been hit!`;
+    // } else if (enemy.board.sunkShipsNames.length > 0) {
+    //   const ship = enemy.board.sunkShipsNames[0];
+    //   enemy.board.sunkShipsNames.splice(0, 1);
+    //   hitOutcome = `Your ${ship} has been sunk!`;
+    // } else {
+    //   hitOutcome = 'Missed!';
+    // }
+
     console.log(hitOutcome);
     return hitOutcome;
   }

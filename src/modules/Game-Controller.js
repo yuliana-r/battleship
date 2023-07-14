@@ -1,5 +1,6 @@
 /* eslint-disable class-methods-use-this */
 import Player from './Player';
+// import UI from './UI';
 
 export default class Game {
   constructor() {
