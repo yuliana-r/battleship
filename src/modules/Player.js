@@ -66,7 +66,6 @@ export default class Player {
 
   sendAttack(enemy, x, y) {
     if (x !== undefined && y !== undefined) {
-      console.log(`player legal move ${enemy.board.receiveAttack([x, y])} ${x} ${y}`);
       enemy.board.receiveAttack([x, y]);
     }
 
@@ -77,26 +76,21 @@ export default class Player {
       const potentialMoves = this._potentialMoves;
 
       if (potentialMoves.length > 0) {
-        const coord = potentialMoves.shift();
-        [row, column] = coord;
-        legalMove = enemy.board.receiveAttack([row, column]);
-        console.log(`AI legal move: ${legalMove} ${row} ${column}`);
+        while (!legalMove) {
+          const coord = potentialMoves.shift();
+          [row, column] = coord;
+          legalMove = enemy.board.receiveAttack([row, column]);
+        }
       } else {
-        while (!legalMove && legalMove !== 'miss' && legalMove !== 'hit' && potentialMoves.length === 0) {
+        while (!legalMove && potentialMoves.length === 0) {
           row = this.getRandomAICoord();
           column = this.getRandomAICoord();
-
           legalMove = enemy.board.receiveAttack([row, column]);
-          console.log(`AI legal move: ${legalMove} ${row} ${column}`);
         }
       }
-
-      // if (legalMove === 'hit') {
-      //   this.updatePotentialMoves(row, column, potentialMoves);
-      // }
-
       const outcome = this.getHitOutcome(enemy);
-      if (legalMove === 'hit' && this.getHitOutcome(enemy).includes('has been sunk')) {
+
+      if (outcome.includes('has been sunk') && legalMove === 'hit') {
         potentialMoves.splice(0, potentialMoves.length);
       } else if (legalMove === 'hit') {
         this.updatePotentialMoves(row, column, potentialMoves);
@@ -104,7 +98,6 @@ export default class Player {
       return outcome;
     }
     return this.getHitOutcome(enemy);
-    // console.log(`${this.getHitOutcome(enemy)}4`);
   }
 
   getHitOutcome(enemy) {
