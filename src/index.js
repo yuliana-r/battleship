@@ -2,38 +2,34 @@ import UI from './modules/UI';
 import Game from './modules/Game-Controller';
 import './styles/style.css';
 
-const game = new Game();
+function initializeGame() {
+  const game = new Game();
+  const info = document.getElementById('info');
+  const player = game.playerOne;
+  const AI = game.playerTwo;
 
-const info = document.getElementById('info');
+  UI.renderGameboard(player);
+  UI.renderGameboard(AI);
+  game.startGame();
 
-const player = game.playerOne;
-const AI = game.playerTwo;
+  UI.updateBoard(AI);
+  UI.updateBoard(player);
 
-UI.renderGameboard(player);
-UI.renderGameboard(AI);
-game.startGame();
+  const computerCells = document.querySelectorAll('#player-two div');
 
-AI.sendAttack(player);
-AI.sendAttack(player);
-AI.sendAttack(player);
-AI.sendAttack(player);
-AI.sendAttack(player);
-AI.sendAttack(player);
-AI.sendAttack(player);
-AI.sendAttack(player);
-AI.sendAttack(player);
-AI.sendAttack(player);
-AI.sendAttack(player);
-AI.sendAttack(player);
-UI.updateBoard(AI);
-UI.updateBoard(player);
+  computerCells.forEach((cell) => {
+    cell.addEventListener('click', (e) => {
+      const row = e.target.getAttribute('data-cell-x');
+      const column = e.target.getAttribute('data-cell-y');
+      info.innerText = player.sendAttack(AI, row, column);
+      UI.updateBoard(AI);
 
-const computerCells = document.querySelectorAll('#player-two div');
-computerCells.forEach((cell) => {
-  cell.addEventListener('click', (e) => {
-    const row = e.target.getAttribute('data-cell-x');
-    const column = e.target.getAttribute('data-cell-y');
-    info.innerText = player.sendAttack(AI, row, column);
-    UI.updateBoard(AI);
+      setTimeout(() => {
+        info.innerText = (AI.sendAttack(player));
+        UI.updateBoard(player);
+      }, 1200);
+    });
   });
-});
+}
+
+initializeGame();

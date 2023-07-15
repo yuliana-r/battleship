@@ -89,11 +89,11 @@ export default class Gameboard {
     const row = coordinates[0];
     const column = coordinates[1];
 
-    if (row > 9 || column > 9 || board[row][column] === 'miss'
-    || board[row][column] === 'hit') return false;
+    if (board[row][column] === 'miss') return false;
+    if (board[row][column] === 'hit') return false;
+    if (row > 9 || column > 9) return false;
 
     if (board[row][column] === 0) {
-      // record the missed shot for styling purposes?
       board[row][column] = 'miss';
       return 'miss';
     }

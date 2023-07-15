@@ -7,7 +7,8 @@ export default class Game {
   constructor() {
     this._playerOne = new Player(false);
     this._playerTwo = new Player(true);
-    this._currentPlayer = this.playerOne;
+    this._currentPlayer = this._playerOne;
+    // this._otherPlayer = this._playerTwo;
   }
 
   get playerOne() {
@@ -25,16 +26,12 @@ export default class Game {
   startGame() {
     this._playerOne.placeShips();
     this._playerTwo.placeShips();
-    if (this._playerOne.board.checkAllShipsPlaced()
-    && this._playerTwo.board.checkAllShipsPlaced()) {
-    //   this.currentPlayer.sendAttack(this.playerTwo);
-    }
   }
 
   switchPlayer() {
     if (this._currentPlayer === this._playerOne) {
       this._currentPlayer = this._playerTwo;
-      setTimeout(this._currentPlayer.sendAttack(this._playerOne), 3000);
+      this._currentPlayer.sendAttack(this._playerOne);
     } else {
       this._currentPlayer = this._playerOne;
     }
@@ -50,9 +47,9 @@ export default class Game {
   getWinner() {
     let winner;
     if (this._playerOne.board.allShipsSunkCheck()) {
-      winner = this._playerTwo;
+      winner = this._playerTwo.name;
     } else if (this._playerTwo.board.allShipsSunkCheck()) {
-      winner = this._playerOne;
+      winner = this._playerOne.name;
     }
     return winner;
   }
