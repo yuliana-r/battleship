@@ -67,6 +67,11 @@ body {
     background-color: #ebebeb;
 }
 
+.options {
+    display: flex;
+    flex-direction: row;
+}
+
 
 [data-cell*='ship'] {
     background-color: #b8b8b8 !important;
@@ -115,4 +120,35 @@ body {
     height: 6px;
     border-radius: 50%;
     background-color: #84b3c7;
+}
+
+
+.carrier {
+    width: 100px;
+    height: 20px;
+    background-color: #b8b8b8;
+    margin: 10px;
+}
+
+.battleship {
+    width: 80px;
+    height: 20px;
+    background-color: #b8b8b8;
+    margin: 10px;
+}
+
+.destroyer,
+.submarine {
+    width: 60px;
+    height: 20px;
+    background-color: #b8b8b8;
+    margin: 10px;
+}
+
+
+.cruiser {
+    width: 40px;
+    height: 20px;
+    background-color: #b8b8b8;
+    margin: 10px;
 }

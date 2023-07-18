@@ -109,4 +109,8 @@ export default class Gameboard {
     board[row][column] = 'hit';
     return 'hit';
   }
+
+  clearBoard() {
+    this._board = Array(Gameboard.height).fill().map(() => Array(Gameboard.width).fill(0));
+  }
 }

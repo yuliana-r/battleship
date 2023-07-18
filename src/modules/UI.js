@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import Game from './Game-Controller';
 import Player from './Player';
 
@@ -42,6 +43,20 @@ export default class UI {
       if (cellValue === 'miss') {
         cell.setAttribute('data-cell', 'miss');
       }
+    });
+  }
+
+  static disableAllCells() {
+    const allCells = document.querySelectorAll('div');
+    allCells.forEach((cell) => {
+      cell.style.pointerEvents = 'none';
+    });
+  }
+
+  static enableAllCells() {
+    const allCells = document.querySelectorAll('div');
+    allCells.forEach((cell) => {
+      cell.style.pointerEvents = 'auto';
     });
   }
 }

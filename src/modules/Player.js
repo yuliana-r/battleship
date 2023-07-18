@@ -28,11 +28,10 @@ export default class Player {
   }
 
   getRandomAxis() {
-    const randomNum = Math.random();
-    return randomNum < 0.5 ? 'x' : 'y';
+    return Math.random() < 0.5 ? 'x' : 'y';
   }
 
-  placeShips() {
+  placeShips(startIndex, ship, axis) {
     const gameboard = this._board;
 
     const carrier = new Ship('carrier', 5);
@@ -54,11 +53,28 @@ export default class Player {
         }
       }
     } else {
-      gameboard.placeShip([2, 0], carrier, 'y');
-      gameboard.placeShip([8, 2], battleship, 'x');
-      gameboard.placeShip([6, 4], destroyer, 'x');
-      gameboard.placeShip([1, 4], submarine, 'y');
-      gameboard.placeShip([2, 7], cruiser, 'y');
+      // const options = document.getElementById('options');
+      // gameboard.placeShip([2, 0], carrier, 'y');
+      // gameboard.placeShip([8, 2], battleship, 'x');
+      // gameboard.placeShip([6, 4], destroyer, 'x');
+      // gameboard.placeShip([1, 4], submarine, 'y');
+      // gameboard.placeShip([2, 7], cruiser, 'y');
+      console.log(startIndex);
+      console.log(carrier);
+      console.log(ship);
+      console.log(axis);
+      if (!gameboard.placeShip(startIndex, ship, axis)) {
+        return false;
+      }
+      gameboard.placeShip(startIndex, ship, axis);
+
+      console.log(gameboard);
+      // options.append(carrier);
+      // options.append(battleship);
+      // options.append(destroyer);
+      // options.append(submarine);
+      // options.append(cruiser);
+      // console.log(Array.from(options.children));
     }
 
     return gameboard;
@@ -94,6 +110,12 @@ export default class Player {
         potentialMoves.splice(0, potentialMoves.length);
       } else if (legalMove === 'hit') {
         this.updatePotentialMoves(row, column, potentialMoves);
+        potentialMoves.sort((a, b) => {
+          if (a[0] === b[0]) {
+            return b[0] - a[0];
+          }
+          return a[1] - b[1];
+        });
       }
       return outcome;
     }
@@ -121,8 +143,8 @@ export default class Player {
   updatePotentialMoves(row, column, potentialMoves) {
     const adjacentMoves = [
       [row - 1, column],
-      [row, column - 1],
       [row + 1, column],
+      [row, column - 1],
       [row, column + 1],
     ];
 

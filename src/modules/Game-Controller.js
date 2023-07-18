@@ -8,7 +8,7 @@ export default class Game {
     this._playerOne = new Player(false);
     this._playerTwo = new Player(true);
     this._currentPlayer = this._playerOne;
-    // this._otherPlayer = this._playerTwo;
+    this._opponent = this._playerTwo;
   }
 
   get playerOne() {
@@ -23,6 +23,14 @@ export default class Game {
     return this._currentPlayer;
   }
 
+  get opponent() {
+    return this._opponent;
+  }
+
+  // set currentPlayer(player) {
+  //   this._currentPlayer = player;
+  // }
+
   startGame() {
     this._playerOne.placeShips();
     this._playerTwo.placeShips();
@@ -31,9 +39,10 @@ export default class Game {
   switchPlayer() {
     if (this._currentPlayer === this._playerOne) {
       this._currentPlayer = this._playerTwo;
-      this._currentPlayer.sendAttack(this._playerOne);
+      this._opponent = this._playerOne;
     } else {
       this._currentPlayer = this._playerOne;
+      this._opponent = this._playerTwo;
     }
   }
 

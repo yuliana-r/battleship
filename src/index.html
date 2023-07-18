@@ -9,14 +9,45 @@
   <body>
     <div class="header">
       <h1 class="title">BATTLESHIP</h1>
-      <p class="info" id="info">
-        Place your ships on the board to start playing!
-      </p>
+      <p class="info" id="info">something</p>
+      <button id="restart-btn" class="restart">restart</button>
     </div>
 
     <div class="gameboards" id="gameboards">
       <div class="board" id="player-one"></div>
       <div class="board" id="player-two"></div>
+    </div>
+    <div class="options" id="options">
+      <div
+        id="carrier"
+        class="carrier ship"
+        data-length="5"
+        draggable="true"
+      ></div>
+      <div
+        id="battleship"
+        class="battleship ship"
+        data-length="4"
+        draggable="true"
+      ></div>
+      <div
+        id="destroyer"
+        class="destroyer ship"
+        data-length="3"
+        draggable="true"
+      ></div>
+      <div
+        id="submarine"
+        class="submarine ship"
+        data-length="3"
+        draggable="true"
+      ></div>
+      <div
+        id="cruiser"
+        class="cruiser ship"
+        data-length="2"
+        draggable="true"
+      ></div>
     </div>
   </body>
 </html>
