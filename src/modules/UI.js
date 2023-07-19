@@ -158,48 +158,49 @@ export default class UI {
       });
 
       gameboards.innerHTML = `
-      <div class="player-container">
-          <div class="board" id="player-one"></div>
-          <div class="flip-container">
-            <button id="flip-btn">horizontal</button>
+        <div class="player-container">
+            <div class="board" id="player-one"></div>
+            <div class="flip-container">
+              <button id="flip-btn">horizontal</button>
+            </div>
+            <div class="options" id="options">
+              <div
+                id="carrier"
+                class="carrier ship"
+                data-length="5"
+                draggable="true"
+              ></div>
+              <div
+                id="battleship"
+                class="battleship ship"
+                data-length="4"
+                draggable="true"
+              ></div>
+              <div
+                id="destroyer"
+                class="destroyer ship"
+                data-length="3"
+                draggable="true"
+              ></div>
+              <div
+                id="submarine"
+                class="submarine ship"
+                data-length="3"
+                draggable="true"
+              ></div>
+              <div
+                id="cruiser"
+                class="cruiser ship"
+                data-length="2"
+                draggable="true"
+              ></div>
+            </div>
           </div>
-          <div class="options" id="options">
-            <div
-              id="carrier"
-              class="carrier ship"
-              data-length="5"
-              draggable="true"
-            ></div>
-            <div
-              id="battleship"
-              class="battleship ship"
-              data-length="4"
-              draggable="true"
-            ></div>
-            <div
-              id="destroyer"
-              class="destroyer ship"
-              data-length="3"
-              draggable="true"
-            ></div>
-            <div
-              id="submarine"
-              class="submarine ship"
-              data-length="3"
-              draggable="true"
-            ></div>
-            <div
-              id="cruiser"
-              class="cruiser ship"
-              data-length="2"
-              draggable="true"
-            ></div>
-          </div>
-        </div>
-        <div class="board" id="player-two"></div>`;
+          <div class="board" id="player-two"></div>`;
       player.board.clearBoard();
       AI.board.clearBoard();
       flipBtn.style.visibility = 'visible';
+      info.textContent = 'Place your ships to start playing!';
       this.initializeGame();
     });
 
