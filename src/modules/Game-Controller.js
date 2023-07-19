@@ -1,7 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable class-methods-use-this */
 import Player from './Player';
-// import UI from './UI';
 
 export default class Game {
   constructor() {
@@ -27,12 +26,7 @@ export default class Game {
     return this._opponent;
   }
 
-  // set currentPlayer(player) {
-  //   this._currentPlayer = player;
-  // }
-
   startGame() {
-    this._playerOne.placeShips();
     this._playerTwo.placeShips();
   }
 

@@ -3,51 +3,67 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/f5ed9082ee.js"
+      crossorigin="anonymous"
+    ></script>
     <link rel="icon" href="./assets/icon.ico" />
     <title>Battleships</title>
   </head>
   <body>
     <div class="header">
       <h1 class="title">BATTLESHIP</h1>
-      <p class="info" id="info">something</p>
+      <p class="info" id="info">Place your ships to start playing!</p>
       <button id="restart-btn" class="restart">restart</button>
     </div>
 
     <div class="gameboards" id="gameboards">
-      <div class="board" id="player-one"></div>
+      <div class="player-container">
+        <div class="board" id="player-one"></div>
+        <div class="flip-container">
+          <button id="flip-btn">horizontal</button>
+        </div>
+        <div class="options" id="options">
+          <div
+            id="carrier"
+            class="carrier ship"
+            data-length="5"
+            draggable="true"
+          ></div>
+          <div
+            id="battleship"
+            class="battleship ship"
+            data-length="4"
+            draggable="true"
+          ></div>
+          <div
+            id="destroyer"
+            class="destroyer ship"
+            data-length="3"
+            draggable="true"
+          ></div>
+          <div
+            id="submarine"
+            class="submarine ship"
+            data-length="3"
+            draggable="true"
+          ></div>
+          <div
+            id="cruiser"
+            class="cruiser ship"
+            data-length="2"
+            draggable="true"
+          ></div>
+        </div>
+      </div>
       <div class="board" id="player-two"></div>
     </div>
-    <div class="options" id="options">
-      <div
-        id="carrier"
-        class="carrier ship"
-        data-length="5"
-        draggable="true"
-      ></div>
-      <div
-        id="battleship"
-        class="battleship ship"
-        data-length="4"
-        draggable="true"
-      ></div>
-      <div
-        id="destroyer"
-        class="destroyer ship"
-        data-length="3"
-        draggable="true"
-      ></div>
-      <div
-        id="submarine"
-        class="submarine ship"
-        data-length="3"
-        draggable="true"
-      ></div>
-      <div
-        id="cruiser"
-        class="cruiser ship"
-        data-length="2"
-        draggable="true"
-      ></div>
-    </div>
+
+    <footer>
+      <a href="https://github.com/yuliana-r/battleships" target="_blank">
+        <i class="fab fa-github" aria-hidden="true"></i
+      ></a>
+      <p>yuliana-r</p>
+    </footer>
   </body>
 </html>

@@ -8,8 +8,16 @@
     margin: 0;
 }
 
+html {
+    height: 100%;
+}
+
 body {
     background-color: #ebf3f7;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .header {
@@ -17,7 +25,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 4em 1em 1em;
+    padding: 2em 1em 1em;
 }
 
 .title {
@@ -25,12 +33,13 @@ body {
     font-size: 3em;
     letter-spacing: 12px;
     color: #6ba3bc;
+    margin-bottom: 0.5em;
 }
 
 .info {
     font-family: Arial, Helvetica, sans-serif;
-    margin: 2em;
-    font-size: 25px;
+    margin: 1em;
+    font-size: 20px;
     color: #292929;
     min-width: 300px;
     text-align: center;
@@ -41,7 +50,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     gap: 8em;
     flex-wrap: wrap;
 }
@@ -70,7 +79,21 @@ body {
 .options {
     display: flex;
     flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    min-width: 350px;
+    width: 350px;
 }
+
+.player-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}
+
 
 
 [data-cell*='ship'] {
@@ -122,33 +145,116 @@ body {
     background-color: #84b3c7;
 }
 
+.ship {
+    box-sizing: border-box;
+}
+
+.ship[style*="rotate(90deg)"] {
+    /* margin-top: 10%;
+    height: 30px; */
+    /* justify-content: flex-start; */
+    height: 20px;
+}
+
+.carrier[style*="rotate(90deg)"] {
+    width: 100px;
+}
 
 .carrier {
-    width: 100px;
-    height: 20px;
-    background-color: #b8b8b8;
-    margin: 10px;
+    min-width: 150px;
+}
+
+.battleship[style*="rotate(90deg)"] {
+    width: 80px;
 }
 
 .battleship {
-    width: 80px;
-    height: 20px;
-    background-color: #b8b8b8;
-    margin: 10px;
+    width: 120px;
+}
+
+.destroyer[style*="rotate(90deg)"],
+.submarine[style*="rotate(90deg)"] {
+    width: 60px;
 }
 
 .destroyer,
 .submarine {
-    width: 60px;
-    height: 20px;
-    background-color: #b8b8b8;
-    margin: 10px;
+    width: 90px;
 }
 
+.cruiser[style*="rotate(90deg)"] {
+    width: 40px;
+}
 
 .cruiser {
-    width: 40px;
-    height: 20px;
+    width: 60px;
+}
+
+.carrier,
+.battleship,
+.destroyer,
+.submarine,
+.cruiser {
+    height: 30px;
     background-color: #b8b8b8;
-    margin: 10px;
+    margin: 15px 0 0;
+    border: 2px solid #7a7a7a;
+}
+
+.carrier:hover,
+.battleship:hover,
+.destroyer:hover,
+.submarine:hover,
+.cruiser:hover {
+    opacity: 0.8;
+    cursor: grab;
+}
+
+footer {
+    user-select: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    color: #555555;
+    gap: 10px;
+    padding: 1em 0 0.5em;
+    letter-spacing: 2px;
+}
+
+.fa-github {
+    font-size: 20px;
+    color: #555555;
+    transition: transform 0.3s ease-in-out;
+}
+
+.fa-github:hover {
+    transform: rotate(360deg) scale(1.2);
+}
+
+#flip-btn,
+#restart-btn {
+    border: none;
+    cursor: pointer;
+    background-color: #ebf3f7;
+    color: #6ba3bc;
+    margin: 5px;
+    font-size: 1.25em;
+    padding: 5px;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .title {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 843px) {
+    .gameboards {
+        gap: 1em;
+    }
 }

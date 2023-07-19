@@ -53,28 +53,10 @@ export default class Player {
         }
       }
     } else {
-      // const options = document.getElementById('options');
-      // gameboard.placeShip([2, 0], carrier, 'y');
-      // gameboard.placeShip([8, 2], battleship, 'x');
-      // gameboard.placeShip([6, 4], destroyer, 'x');
-      // gameboard.placeShip([1, 4], submarine, 'y');
-      // gameboard.placeShip([2, 7], cruiser, 'y');
-      console.log(startIndex);
-      console.log(carrier);
-      console.log(ship);
-      console.log(axis);
       if (!gameboard.placeShip(startIndex, ship, axis)) {
         return false;
       }
       gameboard.placeShip(startIndex, ship, axis);
-
-      console.log(gameboard);
-      // options.append(carrier);
-      // options.append(battleship);
-      // options.append(destroyer);
-      // options.append(submarine);
-      // options.append(cruiser);
-      // console.log(Array.from(options.children));
     }
 
     return gameboard;
