@@ -67,7 +67,11 @@ export default class UI {
   static enableOpponentCells() {
     const allCells = document.querySelectorAll('#player-two div');
     allCells.forEach((cell) => {
-      cell.style.pointerEvents = 'auto';
+      if (cell.getAttribute('data-cell') === 'miss' || cell.getAttribute('data-cell') === 'hit') {
+        cell.style.pointerEvents = 'none';
+      } else {
+        cell.style.pointerEvents = 'auto';
+      }
     });
   }
 
@@ -207,6 +211,7 @@ export default class UI {
     // Game loop
     computerCells.forEach((cell) => {
       cell.addEventListener('click', (e) => {
+        if (e.target.getAttribute('data-cell') !== 'none') return;
         UI.disableOpponentCells();
         const row = e.target.getAttribute('data-cell-x');
         const column = e.target.getAttribute('data-cell-y');
